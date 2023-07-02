@@ -11,6 +11,13 @@ class CategoryListCreateAPIView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+    def get_queryset(self):
+            queryset = super().get_queryset()
+            category_name = self.request.query_params.get('category_name')
+            if category_name:
+                queryset = queryset.filter(category_name__icontains=category_name)
+            return queryset
+
     def list(self, request, *args, **kwargs):
         categories = self.get_queryset()
         serializer = self.get_serializer(categories, many=True)
