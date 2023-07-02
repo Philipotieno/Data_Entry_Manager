@@ -12,7 +12,7 @@ class CategorySerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Category
-        fields = ('id', 'name', 'description', 'fields')
+        fields = ('id', 'category_name', 'description', 'fields')
 
 
     def validate_name(self, value):

@@ -10,6 +10,17 @@ class CategoryListCreateAPIView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+
+class CategoryRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response({"message": "Category deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+
 # class CategoryListCreateView(viewsets.ModelViewSet):
 #     queryset = Category.objects.all()
 #     serializer_class = CategorySerializer
