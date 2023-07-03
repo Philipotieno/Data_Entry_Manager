@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@3.2.5
+
 jobs:
   build:
     docker:
@@ -23,6 +26,3 @@ jobs:
       # Upload coverage report to Codecov
       - codecov/upload:
           token: CODECOV_TOKEN
-          
-orbs:
-  codecov/codecov@3.2.4
