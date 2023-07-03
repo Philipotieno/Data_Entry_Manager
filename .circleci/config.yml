@@ -15,7 +15,5 @@ jobs:
       - run: pip install -r requirements.txt
 
       # Run tests with coverage
-      # - run: |
-      #     pip install coverage
-      #     coverage run -m pytest
-      #     coverage report -m
+      - run: |
+          pytest --cov
