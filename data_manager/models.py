@@ -6,7 +6,7 @@ class Category(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.category_name
     
 
 class CategoryDetails(models.Model):
