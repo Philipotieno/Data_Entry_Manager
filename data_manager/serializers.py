@@ -3,16 +3,21 @@ from .models import Category, CategoryDetails
 
 
 class CategoryDetailsSerializer(serializers.ModelSerializer):
+    created_at = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S", read_only=True)
+    updated_at = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S", read_only=True)
     class Meta:
         model = CategoryDetails
-        fields = ['name', 'value']
+        fields = ['name', 'value', 'created_at', 'updated_at']
 
 class CategorySerializer(serializers.ModelSerializer):
+    created_at = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S", read_only=True)
+    updated_at = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S", read_only=True)
+    
     fields = CategoryDetailsSerializer(many=True, read_only=True)
     
     class Meta:
         model = Category
-        fields = ('id', 'category_name', 'description', 'fields')
+        fields = ('id', 'category_name', 'description', 'created_at', 'updated_at', 'fields')
 
 
     def validate_name(self, value):
