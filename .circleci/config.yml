@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+ codecov/codecov@3.2.4
+
 jobs:
   build:
     docker:
@@ -17,5 +20,3 @@ jobs:
       # Run tests with coverage
       - run: |
           pytest --cov
-          name: Upload coverage report to Codecov
-          command: bash <(curl -s https://codecov.io/bash) -t 3cd4fe1d-6f77-4465-8c3a-34951b1765fe
