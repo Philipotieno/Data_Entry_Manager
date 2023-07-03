@@ -1,0 +1,28 @@
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@3.2.5
+
+jobs:
+  build:
+    docker:
+      - image: python:3.9
+
+    steps:
+      - checkout
+
+      # Set up PostgreSQL (if needed)
+      # - run: echo "DATABASE_URL=postgresql://postgres@localhost/dbname" > .env
+
+      # Install project dependencies
+      - run: pip install -r requirements.txt
+
+      # Run tests with coverage
+      - run: |
+          pip install coverage
+          coverage run -m pytest
+          coverage xml
+
+      # Upload coverage report to Codecov
+      - codecov/upload:
+          token: CODECOV_TOKEN
