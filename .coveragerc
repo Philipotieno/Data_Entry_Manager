@@ -1,0 +1,12 @@
+[report]
+show_missing = true
+omit = 
+    *migrations*
+    *tests*
+    config/*
+    test/*
+    manage.py
+    core/apps/profiles/utils.py 
+    core/wsgi.py 
+    core/asgi.py 
+    *__init__.py
