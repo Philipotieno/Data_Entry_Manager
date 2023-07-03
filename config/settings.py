@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
      # 3rd party
     "rest_framework",
+    "drf_yasg",
 
     # Local Apps
     'data_manager',
