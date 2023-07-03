@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
- codecov/codecov@3.2.4
-
 jobs:
   build:
     docker:
@@ -19,4 +16,13 @@ jobs:
 
       # Run tests with coverage
       - run: |
-          pytest --cov
+          pip install coverage
+          coverage run -m pytest
+          coverage xml
+
+      # Upload coverage report to Codecov
+      - codecov/upload:
+          token: CODECOV_TOKEN
+          
+orbs:
+  codecov/codecov@3.2.4
