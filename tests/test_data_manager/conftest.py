@@ -1,6 +1,8 @@
 import pytest
-from rest_framework.test import APIClient
+from rest_framework.test import APIRequestFactory
 
 @pytest.fixture
-def client():
-    return APIClient()
+def api_client():
+    """Create a DRF API client using APIRequestFactory."""
+    return APIRequestFactory()
+
