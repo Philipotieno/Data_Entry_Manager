@@ -61,3 +61,27 @@ def test_category_list(api_client):
 
     assert response.status_code == 200
     assert len(response.data) == Category.objects.count()
+
+@pytest.mark.django_db
+def test_category_list_with_filter(api_client, fake):
+    """Test the category list endpoint with category_name filter."""
+    url = reverse('category-list-create')
+    category_name = fake.word()
+
+    # Create categories with different names for testing
+    for _ in range(3):
+        mixer.blend(Category)
+
+    # Create a category with the specified category_name
+    category_with_filter = mixer.blend(Category, category_name=category_name)
+
+    request = api_client.get(url, {'category_name': category_name})
+    response = CategoryListCreateAPIView.as_view()(request)
+
+    # import pdb ; pdb.set_trace()
+
+    assert response.status_code == 200
+    assert len(response.data) == 1
+
+    category_data = response.data[0]['category'][0]
+    assert category_data['category_name'] == category_name
