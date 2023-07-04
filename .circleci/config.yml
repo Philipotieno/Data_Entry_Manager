@@ -19,9 +19,10 @@ jobs:
 
       # Run tests with coverage
       - run: |
-          pip install coverage
-          coverage run -m pytest
-          coverage xml
+          pytest
+        # pip install coverage
+        # coverage run -m pytest
+        # coverage xml
 
       # Upload coverage report to Codecov
       - codecov/upload:
