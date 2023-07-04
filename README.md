@@ -51,3 +51,5 @@ To start and run the local development server,
     ```
     $ pytest
     ```
+
+![Tests](https://github.com/Philipotieno/Data_Entry_Manager/blob/main/tests.png)
