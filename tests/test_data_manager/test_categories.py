@@ -4,7 +4,8 @@ from django.urls import reverse
 from mixer.backend.django import mixer
 from data_manager.models import Category, CategoryDetails
 from data_manager.serializers import CategorySerializer
-from data_manager.views import CategoryListCreateAPIView
+from data_manager.views import CategoryListCreateAPIView, CategoryRetrieveUpdateDestroyAPIView
+
 
 @pytest.fixture
 def fake():
@@ -85,3 +86,21 @@ def test_category_list_with_filter(api_client, fake):
 
     category_data = response.data[0]['category'][0]
     assert category_data['category_name'] == category_name
+
+
+
+@pytest.mark.django_db
+def test_category_retrieve(api_client, category):
+    """Test the listing of a single category."""
+    url = reverse('category-retrieve-update-destroy', kwargs={'pk': category.pk})
+
+    request = api_client.get(url)
+    response = CategoryRetrieveUpdateDestroyAPIView.as_view()(request, pk=category.pk)
+
+
+    assert response.status_code == 200
+    assert response.data['category']['category_name'] == category.category_name
+    assert len(response.data) == 2
+    assert response.data['category']['id'] == category.id
+    # assert response.data['category_details'][0]['name'] == category_details.name
+    # assert response.data['category_details'][0]['value'] == category_details.value
