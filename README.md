@@ -46,3 +46,8 @@ To start and run the local development server,
         Navigate to page
             `http://localhost:8000/swagger`
 
+
+8. Running tests:
+    ```
+    $ pytest
+    ```
